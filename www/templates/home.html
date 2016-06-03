@@ -6,7 +6,7 @@
             <span class="badge badge-assertive">{{dish.label}}</span>
         </div>
         <div class="item item-thumbnail-left item-text-wrap">
-            <img ng-src="{{baseURL+dish.image}}" alt="Uthappizza">
+            <img ng-src="{{baseURL+dish.image}}" alt={{dish.name}}>
             <h2>{{dish.name}}
              <span class="badge">{{dish.price | currency}}</span></h2>
             <p>{{dish.description}}</p>
