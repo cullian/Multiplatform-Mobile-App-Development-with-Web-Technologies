@@ -6,7 +6,7 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form id="commentForm" name="commentForm" ng-submit="submitComment()">
+    <form id="commentForm" name="commentForm" novalidate="" ng-submit="submitComment()">
       <div class="list">
 <!--          should these labels be <ion-item>'s?? oh well it works anyway and is the way ionic scaffolded the login-->
         <label class="item item-input item-select"> 
@@ -15,10 +15,13 @@
                 <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
             </select>
         </label>
-        <label class="item item-input">
+        <div ng-class="{ 'has-error' : commentForm.author.$error.required && !commentForm.author.$pristine }">
+        <label for="author" class="item item-input">
           <span class="input-label">Your Name</span>
-          <input type="text" ng-model="myComment.author">
+          <input  id="author" name="author" type="text" ng-model="myComment.author" required />
+        <span ng-show="commentForm.author.$error.required && !commentForm.author.$pristine" class="pull-left">Your Name is required.</span>
         </label>
+        </div>
         <label class="item item-input">
             <span class="input-label">Your Comment</span>
             <textarea ng-model="myComment.comment"></textarea>     
