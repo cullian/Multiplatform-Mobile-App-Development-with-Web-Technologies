@@ -1,6 +1,6 @@
 angular.module('conFusion.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera, $cordovaImagePicker) {    
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera, $cordovaImagePicker) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -41,7 +41,7 @@ angular.module('conFusion.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-    
+
   $scope.reservation = {};
 
   // Create the reserve modal that we will use later
@@ -70,7 +70,7 @@ angular.module('conFusion.controllers', [])
     $timeout(function() {
       $scope.closeReserve();
     }, 1000);
-  };        
+  };
 
   $scope.registration = {};
 
@@ -99,7 +99,7 @@ angular.module('conFusion.controllers', [])
             $scope.closeRegister();
         }, 1000);
     };
-    
+
     $ionicPlatform.ready(function() {
 //        Set Variables for cordova camera
         var options = {
@@ -112,7 +112,6 @@ angular.module('conFusion.controllers', [])
             targetHeight: 100,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false,
-            maximumImagesCount: 10
         };
 //        Function to take Picture
          $scope.takePicture = function() {
@@ -125,21 +124,30 @@ angular.module('conFusion.controllers', [])
             $scope.registerform.show();
 
         };
+
+        //        Set Variables for cordova picker
+        var options2 = {
+            quality: 50,
+            width: 100,
+            height: 100,
+            maximumImagesCount: 1
+        };
+
 //        Function to open Gallery
          $scope.openGallery = function() {
-            $cordovaImagePicker.getPictures(options).then(function(imageData) {
+            $cordovaImagePicker.getPictures(options2).then(function(imageData) {
                 if (imageData != "") {
                     $scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
                 }
             }, function(err) {
                 console.log(err);
             });
-             
+
             $scope.registerform.show();
 
         };
     });
-    
+
 })
 
 .controller('MenuController', ['$scope', 'dishes', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast', function ($scope, dishes, favoriteFactory, baseURL, $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
@@ -152,7 +160,7 @@ angular.module('conFusion.controllers', [])
 
 //    Get Dish Object Array
     $scope.dishes = dishes;
-    
+
     console.log('MenuController');
     console.log($scope.dishes);
 
@@ -180,7 +188,7 @@ angular.module('conFusion.controllers', [])
     $scope.toggleDetails = function() {
         $scope.showDetails = !$scope.showDetails;
     };
-    
+
     $scope.addFavorite = function (index) {
         console.log("index is " + index);
         favoriteFactory.addToFavorites(index);
@@ -204,12 +212,12 @@ angular.module('conFusion.controllers', [])
               }, function (error) {
                   // error
               });
-        });        
+        });
     };
-    
-    
-    
-    
+
+
+
+
 }])
 
 .controller('ContactController', ['$scope', function($scope) {
@@ -253,7 +261,7 @@ angular.module('conFusion.controllers', [])
 
     $scope.showDish = false;
     $scope.message="Loading ...";
-    
+
 //    Create Popover for Options with dish
       $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
         scope: $scope
@@ -295,7 +303,7 @@ angular.module('conFusion.controllers', [])
               }, function (error) {
                   // error
               });
-        });        
+        });
     };
 
 //    Create modal for dish-comment commentForm
@@ -307,7 +315,7 @@ angular.module('conFusion.controllers', [])
 //    Close comment modal
     $scope.closeComment = function() {
         $scope.commentForm.hide();
-    };  
+    };
 //    Show comment modal
     $scope.showComment = function() {
         $scope.closeOpt();
@@ -331,7 +339,7 @@ angular.module('conFusion.controllers', [])
         $scope.closeComment();
     };
 
-    
+
 }])
 
 
@@ -365,7 +373,7 @@ angular.module('conFusion.controllers', [])
     $scope.favorites = favorites;
 
     $scope.dishes = dishes;
-    
+
     console.log($scope.dishes, $scope.favorites);
 
     $scope.toggleDelete = function () {
@@ -414,4 +422,3 @@ angular.module('conFusion.controllers', [])
 
     };
 });
-
