@@ -33,6 +33,12 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.confusion183279"
+        },
+        "cordova-plugin-image-picker": {
+            "PACKAGE_NAME": "com.ionicframework.confusion183279"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.ionicframework.confusion183279"
         }
     },
     "dependent_plugins": {
